@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { WiHumidity, WiThermometer, WiRaindrop } from "react-icons/wi";
 import { FaGoogle, FaAmazon } from "react-icons/fa";
-import "./Dashboard.css"; // Ensure this file exists in the same directory
+import "./Dashboard.css"; // Import CSS file
 
 const Dashboard = () => {
   const [humidity, setHumidity] = useState(65);
   const [temperature, setTemperature] = useState(28);
   const [waterLevel, setWaterLevel] = useState(75);
-  const [ecoScore, setEcoScore] = useState(85);
   const [forecast, setForecast] = useState("High water collection expected tomorrow");
   const [history, setHistory] = useState([
     { day: "Mon", water: 10 },
@@ -33,24 +30,18 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <h1 className="title">AWH Smart Dashboard</h1>
       <div className="grid-container">
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiHumidity className="text-blue-500 text-4xl mr-2" />
-            <span className="text-lg">Humidity: {humidity}%</span>
-          </CardContent>
-        </Card>
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiThermometer className="text-red-500 text-4xl mr-2" />
-            <span className="text-lg">Temp: {temperature}°C</span>
-          </CardContent>
-        </Card>
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiRaindrop className="text-green-500 text-4xl mr-2" />
-            <span className="text-lg">Water Level: {waterLevel}%</span>
-          </CardContent>
-        </Card>
+        <div className="card">
+          <WiHumidity className="icon blue" />
+          <span>Humidity: {humidity}%</span>
+        </div>
+        <div className="card">
+          <WiThermometer className="icon red" />
+          <span>Temp: {temperature}°C</span>
+        </div>
+        <div className="card">
+          <WiRaindrop className="icon green" />
+          <span>Water Level: {waterLevel}%</span>
+        </div>
       </div>
 
       <div className="chart-container">
@@ -65,22 +56,22 @@ const Dashboard = () => {
       </div>
 
       <div className="button-group">
-        <Button className="button-primary">Turn ON</Button>
-        <Button className="button-secondary">Turn OFF</Button>
+        <button className="button-primary">Turn ON</button>
+        <button className="button-secondary">Turn OFF</button>
       </div>
 
       <div className="forecast-container">
         <h2 className="subtitle">AI Forecast</h2>
-        <p className="forecast-text">{forecast}</p>
+        <p>{forecast}</p>
       </div>
 
       <div className="integration-buttons">
-        <Button className="google-button">
-          <FaGoogle className="mr-2" /> Google Home
-        </Button>
-        <Button className="alexa-button">
-          <FaAmazon className="mr-2" /> Alexa
-        </Button>
+        <button className="google-button">
+          <FaGoogle className="icon" /> Google Home
+        </button>
+        <button className="alexa-button">
+          <FaAmazon className="icon" /> Alexa
+        </button>
       </div>
     </div>
   );
