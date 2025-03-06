@@ -1,0 +1,42 @@
+from django.shortcuts import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import firebase_admin
+from firebase_admin import credentials, firestore, messaging
+import json
+import requests
+
+# Firebase Initialization
+cred = credentials.Certificate("path/to/your/firebase_credentials.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+@csrf_exempt
+def update_water_usage(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        usage = data.get('usage', 0)
+        db.collection('water_usage').document('home').set({'usage': usage})
+        return JsonResponse({'status': 'success', 'message': 'Water usage updated'})
+
+@csrf_exempt
+def send_notification(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        title = data.get('title', 'Alert')
+        body = data.get('body', '')
+        
+        message = messaging.Message(
+            notification=messaging.Notification(title=title, body=body),
+            topic='water_alerts',
+        )
+        messaging.send(message)
+        return JsonResponse({'status': 'success', 'message': 'Notification sent'})
+
+@csrf_exempt
+def smart_home_control(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        command = data.get('command')
+        smart_home_api = "https://api.smarthome.com/control"
+        response = requests.post(smart_home_api, json={"command": command})
+        return JsonResponse({'status': 'success', 'response': response.json()})
