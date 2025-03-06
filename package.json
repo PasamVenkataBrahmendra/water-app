@@ -6,7 +6,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.0",
-    "@shadcn/ui": "^0.1.0",
     "@tanstack/react-query": "^4.35.5",
     "@vitejs/plugin-react": "^4.2.1",
     "lucide-react": "^0.312.0",
