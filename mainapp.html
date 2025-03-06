@@ -1,80 +1,89 @@
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:http/http.dart' as http;
+import React, { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { WiHumidity, WiThermometer, WiRaindrop } from "react-icons/wi";
+import { FaGoogle, FaAmazon } from "react-icons/fa";
+import "./Dashboard.css"; // Ensure this file exists in the same directory
 
-void main() {
-  runApp(MyApp());
-}
+const Dashboard = () => {
+  const [humidity, setHumidity] = useState(65);
+  const [temperature, setTemperature] = useState(28);
+  const [waterLevel, setWaterLevel] = useState(75);
+  const [ecoScore, setEcoScore] = useState(85);
+  const [forecast, setForecast] = useState("High water collection expected tomorrow");
+  const [history, setHistory] = useState([
+    { day: "Mon", water: 10 },
+    { day: "Tue", water: 20 },
+    { day: "Wed", water: 15 },
+    { day: "Thu", water: 25 },
+    { day: "Fri", water: 30 }
+  ]);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Smart Water Control',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: DashboardScreen(),
-    );
-  }
-}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHumidity((prev) => (prev > 70 ? 60 : prev + 2));
+      setTemperature((prev) => (prev > 30 ? 25 : prev + 1));
+      setWaterLevel((prev) => (prev > 90 ? 70 : prev + 2));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-class DashboardScreen extends StatefulWidget {
-  @override
-  _DashboardScreenState createState() => _DashboardScreenState();
-}
+  return (
+    <div className="dashboard-container">
+      <h1 className="title">AWH Smart Dashboard</h1>
+      <div className="grid-container">
+        <Card className="animated-card">
+          <CardContent className="flex items-center p-4">
+            <WiHumidity className="text-blue-500 text-4xl mr-2" />
+            <span className="text-lg">Humidity: {humidity}%</span>
+          </CardContent>
+        </Card>
+        <Card className="animated-card">
+          <CardContent className="flex items-center p-4">
+            <WiThermometer className="text-red-500 text-4xl mr-2" />
+            <span className="text-lg">Temp: {temperature}°C</span>
+          </CardContent>
+        </Card>
+        <Card className="animated-card">
+          <CardContent className="flex items-center p-4">
+            <WiRaindrop className="text-green-500 text-4xl mr-2" />
+            <span className="text-lg">Water Level: {waterLevel}%</span>
+          </CardContent>
+        </Card>
+      </div>
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+      <div className="chart-container">
+        <h2 className="subtitle">Water Collection Trends</h2>
+        <LineChart width={600} height={300} data={history}>
+          <XAxis dataKey="day" />
+          <YAxis />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" />
+          <Line type="monotone" dataKey="water" stroke="#3b82f6" />
+        </LineChart>
+      </div>
 
-  double waterUsage = 0.0;
-  
-  @override
-  void initState() {
-    super.initState();
-    _firebaseMessaging.requestPermission();
-    _getWaterUsage();
-  }
+      <div className="button-group">
+        <Button className="button-primary">Turn ON</Button>
+        <Button className="button-secondary">Turn OFF</Button>
+      </div>
 
-  void _getWaterUsage() {
-    _firestore.collection('water_usage').doc('home').snapshots().listen((snapshot) {
-      if (snapshot.exists) {
-        setState(() {
-          waterUsage = snapshot['usage'].toDouble();
-        });
-      }
-    });
-  }
+      <div className="forecast-container">
+        <h2 className="subtitle">AI Forecast</h2>
+        <p className="forecast-text">{forecast}</p>
+      </div>
 
-  Future<void> _sendCommand(String command) async {
-    String url = 'http://your-backend-server.com/api/smart-home';
-    await http.post(Uri.parse(url), body: {'command': command});
-  }
+      <div className="integration-buttons">
+        <Button className="google-button">
+          <FaGoogle className="mr-2" /> Google Home
+        </Button>
+        <Button className="alexa-button">
+          <FaAmazon className="mr-2" /> Alexa
+        </Button>
+      </div>
+    </div>
+  );
+};
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Smart Water Control')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Water Usage: $waterUsage L', style: TextStyle(fontSize: 24)),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _sendCommand('turn_on'),
-              child: Text('Turn On Water Harvesting'),
-            ),
-            ElevatedButton(
-              onPressed: () => _sendCommand('turn_off'),
-              child: Text('Turn Off Water Harvesting'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+export default Dashboard;
