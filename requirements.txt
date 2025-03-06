@@ -1,5 +1,2 @@
-Django
-gunicorn
-djangorestframework
-whitenoise
-psycopg2-binary
+js
+css
