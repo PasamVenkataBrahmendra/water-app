@@ -2,20 +2,20 @@
   "name": "water-app",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@remix-run/dev": "^1.0.0",
-    "@shadcn/ui": "^0.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "recharts": "^2.5.0"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview"
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "recharts": "^2.7.2",
+    "@shadcn/ui": "^0.2.0"
   },
   "devDependencies": {
-    "vite": "^4.4.9"
+    "vite": "^5.0.0"
   }
 }
