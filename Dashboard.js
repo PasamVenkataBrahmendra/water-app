@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { WiHumidity, WiThermometer, WiRaindrop } from "react-icons/wi";
 import { FaGoogle, FaAmazon } from "react-icons/fa";
-import "../styles/Dashboard.css"; // Updated path for Netlify compatibility
 
 const Dashboard = () => {
   const [humidity, setHumidity] = useState(65);
@@ -30,31 +29,31 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <h1 className="title">AWH Smart Dashboard</h1>
-      <div className="grid-container">
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiHumidity className="text-blue-500 text-4xl mr-2" />
-            <span className="text-lg">Humidity: {humidity}%</span>
+    <div>
+      <h1>AWH Smart Dashboard</h1>
+      <div>
+        <Card>
+          <CardContent>
+            <WiHumidity />
+            <span>Humidity: {humidity}%</span>
           </CardContent>
         </Card>
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiThermometer className="text-red-500 text-4xl mr-2" />
-            <span className="text-lg">Temp: {temperature}°C</span>
+        <Card>
+          <CardContent>
+            <WiThermometer />
+            <span>Temp: {temperature}°C</span>
           </CardContent>
         </Card>
-        <Card className="animated-card">
-          <CardContent className="flex items-center p-4">
-            <WiRaindrop className="text-green-500 text-4xl mr-2" />
-            <span className="text-lg">Water Level: {waterLevel}%</span>
+        <Card>
+          <CardContent>
+            <WiRaindrop />
+            <span>Water Level: {waterLevel}%</span>
           </CardContent>
         </Card>
       </div>
 
-      <div className="chart-container">
-        <h2 className="subtitle">Water Collection Trends</h2>
+      <div>
+        <h2>Water Collection Trends</h2>
         <LineChart width={600} height={300} data={history}>
           <XAxis dataKey="day" />
           <YAxis />
@@ -64,22 +63,22 @@ const Dashboard = () => {
         </LineChart>
       </div>
 
-      <div className="button-group">
-        <Button className="button-primary">Turn ON</Button>
-        <Button className="button-secondary">Turn OFF</Button>
+      <div>
+        <Button>Turn ON</Button>
+        <Button>Turn OFF</Button>
       </div>
 
-      <div className="forecast-container">
-        <h2 className="subtitle">AI Forecast</h2>
-        <p className="forecast-text">{forecast}</p>
+      <div>
+        <h2>AI Forecast</h2>
+        <p>{forecast}</p>
       </div>
 
-      <div className="integration-buttons">
-        <Button className="google-button">
-          <FaGoogle className="mr-2" /> Google Home
+      <div>
+        <Button>
+          <FaGoogle /> Google Home
         </Button>
-        <Button className="alexa-button">
-          <FaAmazon className="mr-2" /> Alexa
+        <Button>
+          <FaAmazon /> Alexa
         </Button>
       </div>
     </div>
