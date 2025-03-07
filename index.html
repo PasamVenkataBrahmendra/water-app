@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWH Smart Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="background">
+        <div class="overlay"></div>
+    </div>
+
+    <div class="dashboard">
+        <h1 class="title">AWH Smart Dashboard</h1>
+
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-tint icon"></i>
+                <p>Humidity: <span id="humidity">65%</span></p>
+            </div>
+            <div class="card">
+                <i class="fas fa-thermometer-half icon"></i>
+                <p>Temperature: <span id="temperature">28°C</span></p>
+            </div>
+            <div class="card">
+                <i class="fas fa-water icon"></i>
+                <p>Water Level: <span id="water-level">75%</span></p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="button-primary" onclick="toggleDevice(true)">Turn ON</button>
+            <button class="button-secondary" onclick="toggleDevice(false)">Turn OFF</button>
+        </div>
+
+        <div class="forecast">
+            <h2>AI Water Collection Forecast</h2>
+            <p id="forecast-text">High water collection expected tomorrow</p>
+        </div>
+    </div>
+</body>
+</html>
