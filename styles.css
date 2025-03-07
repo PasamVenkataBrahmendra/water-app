@@ -1,0 +1,100 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://source.unsplash.com/1600x900/?nature,water') no-repeat center center/cover;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dashboard {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.grid-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.button-primary, .button-secondary {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.button-primary {
+    background: #28a745;
+}
+
+.button-secondary {
+    background: #dc3545;
+}
+
+.forecast {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
