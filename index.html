@@ -19,14 +19,17 @@
             <div class="card">
                 <i class="fas fa-tint icon"></i>
                 <p>Humidity: <span id="humidity">65%</span></p>
+                <div class="graph" id="humidity-graph"></div>
             </div>
             <div class="card">
                 <i class="fas fa-thermometer-half icon"></i>
                 <p>Temperature: <span id="temperature">28°C</span></p>
+                <div class="graph" id="temperature-graph"></div>
             </div>
             <div class="card">
                 <i class="fas fa-water icon"></i>
                 <p>Water Level: <span id="water-level">75%</span></p>
+                <div class="graph" id="water-level-graph"></div>
             </div>
         </div>
 
@@ -39,6 +42,36 @@
             <h2>AI Water Collection Forecast</h2>
             <p id="forecast-text">High water collection expected tomorrow</p>
         </div>
+
+        <!-- Google and Alexa Integration -->
+        <div class="integration">
+            <h3>Control via Voice Assistants</h3>
+            <button class="button-primary">Connect to Google Assistant</button>
+            <button class="button-secondary">Connect to Alexa</button>
+        </div>
     </div>
+
+    <!-- Login and Signup Pages -->
+    <div id="login-signup-container">
+        <div class="login-page">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <div class="signup-page">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <input type="text" placeholder="Username" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
